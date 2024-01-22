@@ -1,10 +1,22 @@
 package com.javarush.ivankov;
 
-import com.javarush.ivankov.islandfield.IslandArea;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.javarush.ivankov.getuserdata.GetUserData;
 
 public class Main {
     public static void main(String[] args) {
-        IslandArea island = new IslandArea(10,20);
-        System.out.println(island.fieldCreator());
+        GetUserData ui = GetUserData.getInstance();
+        ui.printGreeting();
+        ui.getUserData();
+
+
+
+
+
+
+
+        ObjectMapper objectMapper = new ObjectMapper();
+
+
     }
 }
