@@ -1,11 +1,15 @@
 package com.javarush.ivankov.animals;
 
-import com.javarush.ivankov.abstraction.Eatable;
-import com.javarush.ivankov.abstraction.Movable;
-import com.javarush.ivankov.abstraction.Reproducable;
 import com.javarush.ivankov.animaltype.Herbivores;
 
-public class Sheep extends Herbivores implements Eatable,Movable,Reproducable {
+public class Sheep extends Herbivores {
+    public static int count;
+    private int id = 0;
+
+    public Sheep() {
+        count++;
+        id = count;
+    }
 
     @Override
     public void eat() {
@@ -20,5 +24,28 @@ public class Sheep extends Herbivores implements Eatable,Movable,Reproducable {
     @Override
     public void reproduce() {
 
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Sheep sheep = (Sheep) o;
+
+        return id == sheep.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public static int getCount() {
+        return count;
     }
 }

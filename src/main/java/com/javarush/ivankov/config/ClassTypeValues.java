@@ -4,12 +4,12 @@ import com.javarush.ivankov.animaltype.Type;
 
 public class ClassTypeValues {
     public Type type;
-    public int weight;
+    public double weight;
     public int maxArealQuantity;
     public int maxAbilityToRun;
-    public int maxSatiety;
+    public double maxSatiety;
 
-    public ClassTypeValues(Type type, int weight, int maxArealQuantity, int maxAbilityToRun, int maxSatiety) {
+    public ClassTypeValues(Type type, double weight, int maxArealQuantity, int maxAbilityToRun, double maxSatiety) {
         this.type = type;
         this.weight = weight;
         this.maxArealQuantity = maxArealQuantity;
@@ -21,7 +21,7 @@ public class ClassTypeValues {
         return type;
     }
 
-    public int getWeight() {
+    public double getWeight() {
         return weight;
     }
 
@@ -33,7 +33,7 @@ public class ClassTypeValues {
         return maxAbilityToRun;
     }
 
-    public int getMaxSatiety() {
+    public double getMaxSatiety() {
         return maxSatiety;
     }
 }

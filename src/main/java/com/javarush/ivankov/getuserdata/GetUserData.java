@@ -12,19 +12,23 @@ public class GetUserData {
     private int width;
     private int length;
     public Type type;
-    private int weight;
+    private double weight;
     private int maxArealQuantity;
     private int maxAbilityToRun;
-    private int maxSatiety;
+    private double maxSatiety;
+    private String reinitialize;
+
     private static final GetUserData INSTANCE = new GetUserData();
     private final ArrayList<String> jsonList = new ArrayList<>();
     Scanner scanner = new Scanner(System.in);
+    Scanner scanner1 = new Scanner(System.in);
+
 
     public void printGreeting() {
-        System.out.println("Welcome to game Animal Island!");
+        System.out.println("Welcome to game \"Animal Island\"!");
     }
 
-    private GetUserData() {
+    public GetUserData() {
     }
 
 
@@ -34,46 +38,36 @@ public class GetUserData {
             width = scanner.nextInt();
             System.out.print("Please enter an island length -");
             length = scanner.nextInt();
-            Type[] animalType = Type.values();
-            for (Type type : animalType) {
-                this.type = type;
-                System.out.println("Please enter for animal type " + type + " parameters ");
-                System.out.print("Please enter an animal weight -");
-                weight = scanner.nextInt();
-                System.out.print("Please enter maximal animal quantity of animal -");
-                maxArealQuantity = scanner.nextInt();
-                System.out.print("Please enter maximal ability of animal to run -");
-                maxAbilityToRun = scanner.nextInt();
-                System.out.print("Please enter maximal satiety of animal -");
-                maxSatiety = scanner.nextInt();
-                ClassTypeValues classTypeValues = new ClassTypeValues(type,weight,maxArealQuantity,maxAbilityToRun,maxSatiety);
-                ObjectMapper objectMapper = new ObjectMapper();
-                String json = objectMapper.writeValueAsString(classTypeValues);
-                jsonList.add(json);
-                objectMapper.writeValue(new File("config.json"),jsonList);
+            System.out.println("Would you like to reinitialize game start parameters y/n?");
+            reinitialize = scanner1.nextLine();
+            if (reinitialize.equals("y")) {
+                Type[] animalType = Type.values();
+                for (Type type : animalType) {
+                    this.type = type;
+                    System.out.println("Please enter for animal type " + type + " parameters ");
+                    System.out.print("Please enter an animal weight -");
+                    Scanner scanner2 = new Scanner(System.in);
+                    weight = scanner2.nextDouble();
+                    System.out.print("Please enter maximal animal quantity of animal -");
+                    maxArealQuantity = scanner.nextInt();
+                    System.out.print("Please enter maximal ability of animal to run -");
+                    maxAbilityToRun = scanner.nextInt();
+                    System.out.print("Please enter maximal satiety of animal -");
+                    maxSatiety = scanner.nextDouble();
+                    ClassTypeValues classTypeValues = new ClassTypeValues(type, weight, maxArealQuantity, maxAbilityToRun, maxSatiety);
+                    ObjectMapper objectMapper = new ObjectMapper();
+                    String json = objectMapper.writeValueAsString(classTypeValues);
+                    jsonList.add(json);
+                    objectMapper.writeValue(new File("C:/Java/config.json"), jsonList);
 
 
+                }
+            } else {
+                System.out.println("Current configuration was loaded...");
             }
         } catch (Exception e) {
-            System.out.println("You have to input an integer number!");
-        } finally {
-            scanner.close();
-        }
-    }
-
-    public void getUserConfig() {
-        try {
-            System.out.print("Please enter an animal weight -");
-            weight = scanner.nextInt();
-            System.out.print("Please enter maximal animal quantity of animal -");
-            maxArealQuantity = scanner.nextInt();
-            System.out.print("Please enter maximal ability of animal to run -");
-            maxAbilityToRun = scanner.nextInt();
-            System.out.print("Please enter maximal satiety of animal -");
-            maxSatiety = scanner.nextInt();
-
-        } catch (Exception e) {
-            System.out.println("You have to input an integer number!");
+            System.out.println("Something went wrong!");
+            System.out.println(e.getMessage());
         } finally {
             scanner.close();
         }
@@ -96,7 +90,7 @@ public class GetUserData {
         return type;
     }
 
-    public int getWeight() {
+    public double getWeight() {
         return weight;
     }
 
@@ -108,7 +102,7 @@ public class GetUserData {
         return maxAbilityToRun;
     }
 
-    public int getMaxSatiety() {
+    public double getMaxSatiety() {
         return maxSatiety;
     }
 }

@@ -1,7 +1,12 @@
 package com.javarush.ivankov.animaltype;
 
-public abstract class Herbivores  {
-    private int weight;
+import com.javarush.ivankov.abstraction.Eatable;
+import com.javarush.ivankov.abstraction.Movable;
+import com.javarush.ivankov.abstraction.Organism;
+import com.javarush.ivankov.abstraction.Reproducable;
+
+public abstract class Herbivores  implements Eatable, Movable, Reproducable, Organism {
+    private double weight;
     private int satiety;
     private int runAbility;
 

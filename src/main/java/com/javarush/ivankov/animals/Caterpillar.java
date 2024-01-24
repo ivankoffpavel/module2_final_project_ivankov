@@ -1,12 +1,12 @@
 package com.javarush.ivankov.animals;
 
-import com.javarush.ivankov.animaltype.Predator;
+import com.javarush.ivankov.animaltype.Herbivores;
 
-public class Bear extends Predator {
+public class Caterpillar extends Herbivores {
     public static int count;
     private int id = 0;
 
-    public Bear() {
+    public Caterpillar() {
         count++;
         id = count;
     }
@@ -31,9 +31,9 @@ public class Bear extends Predator {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Bear bear = (Bear) o;
+        Caterpillar that = (Caterpillar) o;
 
-        return id == bear.id;
+        return id == that.id;
     }
 
     @Override

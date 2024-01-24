@@ -1,21 +1,19 @@
 package com.javarush.ivankov;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.javarush.ivankov.getuserdata.GetUserData;
+import com.javarush.ivankov.Initialization.InitializeField;
 
 public class Main {
     public static void main(String[] args) {
-        GetUserData ui = GetUserData.getInstance();
-        ui.printGreeting();
-        ui.getUserData();
+        InitializeField init = new InitializeField();
+        init.fillField();
+        for (int i = 0; i < init.width; i++) {
+            for (int j = 0; j < init.length ; j++) {
+                System.out.println(init.getField().get(i).get(j).getId());
+            }
+
+        }
 
 
-
-
-
-
-
-        ObjectMapper objectMapper = new ObjectMapper();
 
 
     }

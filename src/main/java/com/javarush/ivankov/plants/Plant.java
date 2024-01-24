@@ -4,13 +4,13 @@ import com.javarush.ivankov.abstraction.Growable;
 import com.javarush.ivankov.abstraction.Organism;
 
 public abstract class Plant implements Organism, Growable {
-    private int height;
+    private int satiety = 100;
 
-    public int getHeight() {
-        return height;
+    public int getSatiety() {
+        return satiety;
     }
 
-    public void setHeight(int height) {
-        this.height = height;
+    public void setSatiety(int satiety) {
+        this.satiety = satiety;
     }
 }

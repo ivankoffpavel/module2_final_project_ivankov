@@ -2,11 +2,11 @@ package com.javarush.ivankov.animals;
 
 import com.javarush.ivankov.animaltype.Predator;
 
-public class Bear extends Predator {
+public class Boa extends Predator  {
     public static int count;
     private int id = 0;
 
-    public Bear() {
+    public Boa() {
         count++;
         id = count;
     }
@@ -31,9 +31,9 @@ public class Bear extends Predator {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Bear bear = (Bear) o;
+        Boa boa = (Boa) o;
 
-        return id == bear.id;
+        return id == boa.id;
     }
 
     @Override

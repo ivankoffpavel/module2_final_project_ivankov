@@ -7,7 +7,7 @@ import com.javarush.ivankov.abstraction.Reproducable;
 
 public abstract class Predator implements Eatable, Movable, Reproducable, Organism
 {
-    private int weight;
+    private double weight;
     private int satiety;
     private int runAbility;
 
