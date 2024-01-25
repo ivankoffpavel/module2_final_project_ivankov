@@ -5,6 +5,11 @@ import com.javarush.ivankov.animaltype.Herbivores;
 public class Caterpillar extends Herbivores {
     public static int count;
     private int id = 0;
+    private final double weight = 0.01;
+    private double satiety = 0;
+    private final int runAbility = 0;
+    private final double maxSatiety = 0;
+
 
     public Caterpillar() {
         count++;
@@ -13,6 +18,12 @@ public class Caterpillar extends Herbivores {
 
     @Override
     public void eat() {
+        System.out.println("Caterpillar ID:" + id + " is trying to eat.");
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
@@ -39,10 +50,6 @@ public class Caterpillar extends Herbivores {
     @Override
     public int hashCode() {
         return id;
-    }
-
-    public static int getCount() {
-        return count;
     }
 
     public int getId() {

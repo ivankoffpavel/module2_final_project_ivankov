@@ -3,6 +3,10 @@ package com.javarush.ivankov.animals;
 import com.javarush.ivankov.animaltype.Herbivores;
 
 public class Horse extends Herbivores {
+    private final int weight = 400;
+    private int satiety = 40;
+    private final int runAbility = 4;
+    private final int maxSatiety = 60;
     public static int count;
     private int id = 0;
 
@@ -13,6 +17,12 @@ public class Horse extends Herbivores {
 
     @Override
     public void eat() {
+        System.out.println("Horse ID:" + id + " is trying to eat.");
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
@@ -33,17 +43,37 @@ public class Horse extends Herbivores {
 
         Horse horse = (Horse) o;
 
+        if (satiety != horse.satiety) return false;
         return id == horse.id;
     }
 
     @Override
     public int hashCode() {
-        return id;
+        int result = satiety;
+        result = 31 * result + id;
+        return result;
     }
 
-    public static int getCount() {
-        return count;
+    public int getSatiety() {
+        return satiety;
     }
+
+    public void setSatiety(int satiety) {
+        this.satiety = satiety;
+    }
+
+    public int getWeight() {
+        return weight;
+    }
+
+    public int getRunAbility() {
+        return runAbility;
+    }
+
+    public int getMaxSatiety() {
+        return maxSatiety;
+    }
+
 
     public int getId() {
         return id;

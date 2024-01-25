@@ -5,6 +5,11 @@ import com.javarush.ivankov.animaltype.Herbivores;
 public class Deer extends Herbivores {
     public static int count;
     private int id = 0;
+    private final int weight = 300;
+    private int satiety = 35;
+    private final int runAbility = 4;
+    private final int maxSatiety = 50;
+
 
     public Deer() {
         count++;
@@ -13,6 +18,12 @@ public class Deer extends Herbivores {
 
     @Override
     public void eat() {
+        System.out.println("Deer ID:" + id + " is trying to eat.");
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
@@ -33,16 +44,35 @@ public class Deer extends Herbivores {
 
         Deer deer = (Deer) o;
 
-        return id == deer.id;
+        if (getId() != deer.getId()) return false;
+        return getSatiety() == deer.getSatiety();
     }
 
     @Override
     public int hashCode() {
-        return id;
+        int result = getId();
+        result = 31 * result + getSatiety();
+        return result;
     }
 
-    public static int getCount() {
-        return count;
+    public int getSatiety() {
+        return satiety;
+    }
+
+    public void setSatiety(int satiety) {
+        this.satiety = satiety;
+    }
+
+    public int getWeight() {
+        return weight;
+    }
+
+    public int getRunAbility() {
+        return runAbility;
+    }
+
+    public int getMaxSatiety() {
+        return maxSatiety;
     }
 
     public int getId() {

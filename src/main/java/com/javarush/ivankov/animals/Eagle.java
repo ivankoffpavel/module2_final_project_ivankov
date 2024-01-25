@@ -5,6 +5,11 @@ import com.javarush.ivankov.animaltype.Predator;
 public class Eagle extends Predator {
     public static int count;
     private int id = 0;
+    private final int weight = 6;
+    private double satiety = 0.5;
+    private final int runAbility = 3;
+    private final double maxSatiety = 1;
+
 
     public Eagle() {
         count++;
@@ -13,6 +18,12 @@ public class Eagle extends Predator {
 
     @Override
     public void eat() {
+        System.out.println("Eagle ID:" + id + " is trying to eat.");
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
@@ -33,19 +44,41 @@ public class Eagle extends Predator {
 
         Eagle eagle = (Eagle) o;
 
-        return id == eagle.id;
+        if (id != eagle.id) return false;
+        return Double.compare(satiety, eagle.satiety) == 0;
     }
 
     @Override
     public int hashCode() {
-        return id;
+        int result;
+        long temp;
+        result = id;
+        temp = Double.doubleToLongBits(satiety);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        return result;
     }
 
-    public static int getCount() {
-        return count;
+    public double getSatiety() {
+        return satiety;
+    }
+
+    public void setSatiety(double satiety) {
+        this.satiety = satiety;
     }
 
     public int getId() {
         return id;
+    }
+
+    public int getWeight() {
+        return weight;
+    }
+
+    public int getRunAbility() {
+        return runAbility;
+    }
+
+    public double getMaxSatiety() {
+        return maxSatiety;
     }
 }

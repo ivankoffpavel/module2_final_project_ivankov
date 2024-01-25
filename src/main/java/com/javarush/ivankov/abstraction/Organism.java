@@ -1,6 +1,6 @@
 package com.javarush.ivankov.abstraction;
 
-public interface Organism  {
+public abstract class Organism  {
      boolean isAlive = true;
 
 }

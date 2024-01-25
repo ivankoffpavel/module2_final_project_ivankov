@@ -5,9 +5,7 @@ import com.javarush.ivankov.abstraction.Movable;
 import com.javarush.ivankov.abstraction.Organism;
 import com.javarush.ivankov.abstraction.Reproducable;
 
-public abstract class Herbivores  implements Eatable, Movable, Reproducable, Organism {
-    private double weight;
-    private int satiety;
-    private int runAbility;
+public abstract class Herbivores extends Organism implements Eatable, Movable, Reproducable{
+
 
 }

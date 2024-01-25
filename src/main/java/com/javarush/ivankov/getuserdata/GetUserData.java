@@ -2,9 +2,7 @@ package com.javarush.ivankov.getuserdata;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javarush.ivankov.animaltype.Type;
-import com.javarush.ivankov.config.ClassTypeValues;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -54,11 +52,11 @@ public class GetUserData {
                     maxAbilityToRun = scanner.nextInt();
                     System.out.print("Please enter maximal satiety of animal -");
                     maxSatiety = scanner.nextDouble();
-                    ClassTypeValues classTypeValues = new ClassTypeValues(type, weight, maxArealQuantity, maxAbilityToRun, maxSatiety);
+                    //ClassTypeValues classTypeValues = new ClassTypeValues(type, weight, maxArealQuantity, maxAbilityToRun, maxSatiety);
                     ObjectMapper objectMapper = new ObjectMapper();
-                    String json = objectMapper.writeValueAsString(classTypeValues);
-                    jsonList.add(json);
-                    objectMapper.writeValue(new File("C:/Java/config.json"), jsonList);
+                    //String json = objectMapper.writeValueAsString(classTypeValues);
+                    //jsonList.add(json);
+                    //objectMapper.writeValue(new File("C:/Java/config.json"), jsonList);
 
 
                 }

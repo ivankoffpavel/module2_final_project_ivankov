@@ -3,6 +3,11 @@ package com.javarush.ivankov.animals;
 import com.javarush.ivankov.animaltype.Predator;
 
 public class Boa extends Predator  {
+    private final int weight = 15;
+    private double satiety = 1.7999999999999998;
+    private final int runAbility = 1;
+    private final double maxSatiety = 3;
+
     public static int count;
     private int id = 0;
 
@@ -13,6 +18,12 @@ public class Boa extends Predator  {
 
     @Override
     public void eat() {
+        System.out.println("Boa ID:" + id + " is trying to eat.");
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
@@ -33,16 +44,38 @@ public class Boa extends Predator  {
 
         Boa boa = (Boa) o;
 
+        if (Double.compare(satiety, boa.satiety) != 0) return false;
         return id == boa.id;
     }
 
     @Override
     public int hashCode() {
-        return id;
+        int result;
+        long temp;
+        temp = Double.doubleToLongBits(satiety);
+        result = (int) (temp ^ (temp >>> 32));
+        result = 31 * result + id;
+        return result;
     }
 
-    public static int getCount() {
-        return count;
+    public double getSatiety() {
+        return satiety;
+    }
+
+    public void setSatiety(double satiety) {
+        this.satiety = satiety;
+    }
+
+    public int getWeight() {
+        return weight;
+    }
+
+    public int getRunAbility() {
+        return runAbility;
+    }
+
+    public double getMaxSatiety() {
+        return maxSatiety;
     }
 
     public int getId() {

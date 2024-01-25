@@ -9,11 +9,14 @@ import java.util.HashSet;
 public class Areal {
     public static int arealCount = 0;
     private int id = 0;
+    private final int widthValue;
+    private final int lengthValue;
 
     private HashMap<Type, HashSet<Organism>> arealMap;
 
-    public Areal(HashMap<Type, HashSet<Organism>> arealMap) {
-
+    public Areal(int widthValue,int lengthValue,HashMap<Type, HashSet<Organism>> arealMap) {
+        this.widthValue = widthValue;
+        this.lengthValue = lengthValue;
         this.arealMap = arealMap;
         arealCount++;
         id = arealCount;
@@ -30,4 +33,11 @@ public class Areal {
         return arealCount;
     }
 
+    public int getWidthValue() {
+        return widthValue;
+    }
+
+    public int getLengthValue() {
+        return lengthValue;
+    }
 }

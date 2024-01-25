@@ -3,14 +3,10 @@ package com.javarush.ivankov.plants;
 import com.javarush.ivankov.abstraction.Growable;
 import com.javarush.ivankov.abstraction.Organism;
 
-public abstract class Plant implements Organism, Growable {
-    private int satiety = 100;
+public  class Plant extends Organism implements Growable {
 
-    public int getSatiety() {
-        return satiety;
-    }
+    @Override
+    public void grow() {
 
-    public void setSatiety(int satiety) {
-        this.satiety = satiety;
     }
 }

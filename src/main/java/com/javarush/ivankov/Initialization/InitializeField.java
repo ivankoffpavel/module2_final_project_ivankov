@@ -11,26 +11,25 @@ import java.util.*;
 public class InitializeField {
     public int length = 2;
     public int width = 3;
-    private final ArrayList<ArrayList<Areal>> field = new ArrayList<>();
+    private final ArrayList<ArrayList<Areal>> residents = new ArrayList<>();//arraylist that contains nested arraylist with areal objects
+    HashMap<Type, ArrayList<Double>> mapParam = new HashMap<>();//map for saving parameters of object animal
 
     public void fillField() {
         int n = 0;
         for (int i = 0; i < width; i++) {
             ArrayList<Areal> list = new ArrayList<>();
             for (int j = 0; j < length; j++) {
-                Areal areal = new Areal(new HashMap<>());
+                Areal areal = new Areal(i, j, new HashMap<>());
                 n++;
 
                 addPlantsToAreal(areal); //adding plants to areal unit of island
 
                 addAnimalsToAreal(areal); //adding animals to areal unit of island
 
-
-                list.add(areal);
-
+                list.add(areal);//add an areal object to length column arraylist
 
             }
-            field.add(list);
+            residents.add(list);//add an arraylist of length column to main arraylist
 
         }
         System.out.println("Number of animal areals " + n + " were created...");
@@ -65,19 +64,19 @@ public class InitializeField {
 
     public void addAnimalsToAreal(Areal areal) {
         Random random = new Random();
-        ArrayList<Integer> maxNumberPerAreal = new ArrayList<>(Arrays.asList(30, 30, 5, 20, 30, 20, 20, 500, 140, 150,
-                140, 50, 10, 200, 1000));
+        ArrayList<Integer> maxNumberPerAreal = new ArrayList<>(Arrays.asList(30, 30, 5, 20, 30, 20, 20, 500, 140, 150, 140, 50, 10,
+                200, 1000));//this arraylist contains values of max quantity of animal type on area unit
         Type[] types = Type.values();
         for (int i = 0; i < types.length - 1; i++) {
             areal.getArealMap().put(types[i], new HashSet<>());
-            for (int j = 0; j < random.nextInt(maxNumberPerAreal.get(i)); j++) {
+            for (int j = 0; j < random.nextInt(maxNumberPerAreal.get(i)+1); j++) {
                 areal.getArealMap().get(types[i]).add(animalFactoryByType(types[i]));
 
             }
         }
     }
 
-    public Organism animalFactoryByType(Type type) {
+    public Organism animalFactoryByType(Type type) { //factory method for creating object by type
         Organism returnType = null;
         switch (type) {
             case BOA:
@@ -130,6 +129,7 @@ public class InitializeField {
     }
 
     public ArrayList<ArrayList<Areal>> getField() {
-        return field;
+        return residents;
     }
+
 }
