@@ -1,6 +1,7 @@
 package com.javarush.ivankov.animals;
 
 import com.javarush.ivankov.animaltype.Predator;
+import com.javarush.ivankov.arealunit.Areal;
 
 public class Bear extends Predator {
     private final int weight = 500;
@@ -17,13 +18,9 @@ public class Bear extends Predator {
     }
 
     @Override
-    public void eat() {
-        System.out.println("Bear ID:" + id + " is trying to eat.");
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+    public void eat(Areal areal) {
+        System.out.println("Bear ID:" + id + " is looking for eating.");
+
 
     }
 

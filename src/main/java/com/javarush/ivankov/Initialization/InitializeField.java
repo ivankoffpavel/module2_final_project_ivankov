@@ -56,7 +56,7 @@ public class InitializeField {
         int plantsNumber;
         Random random = new Random();
         plantsNumber = random.nextInt(201); // randomize the number of grass
-        areal.getArealMap().put(Type.GRASS, new HashSet<>());
+        areal.getArealMap().put(Type.GRASS, new ArrayList<>());
         for (int i = 0; i < plantsNumber; i++) {
             areal.getArealMap().get(Type.GRASS).add(new Grass());
         }
@@ -68,7 +68,7 @@ public class InitializeField {
                 200, 1000));//this arraylist contains values of max quantity of animal type on area unit
         Type[] types = Type.values();
         for (int i = 0; i < types.length - 1; i++) {
-            areal.getArealMap().put(types[i], new HashSet<>());
+            areal.getArealMap().put(types[i], new ArrayList<>());
             for (int j = 0; j < random.nextInt(maxNumberPerAreal.get(i)+1); j++) {
                 areal.getArealMap().get(types[i]).add(animalFactoryByType(types[i]));
 

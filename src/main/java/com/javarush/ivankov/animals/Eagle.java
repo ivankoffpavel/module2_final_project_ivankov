@@ -1,6 +1,7 @@
 package com.javarush.ivankov.animals;
 
 import com.javarush.ivankov.animaltype.Predator;
+import com.javarush.ivankov.arealunit.Areal;
 
 public class Eagle extends Predator {
     public static int count;
@@ -17,13 +18,9 @@ public class Eagle extends Predator {
     }
 
     @Override
-    public void eat() {
-        System.out.println("Eagle ID:" + id + " is trying to eat.");
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+    public void eat(Areal areal) {
+        System.out.println("Eagle ID:" + id + " is looking for eating.");
+
 
     }
 

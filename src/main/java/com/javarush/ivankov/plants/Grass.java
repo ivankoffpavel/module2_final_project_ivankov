@@ -1,7 +1,7 @@
 package com.javarush.ivankov.plants;
 
 public class Grass extends Plant {
-    private int satiety = 60;
+    private double satiety = 60;
     private int id;
     public static int count = 0;
 
@@ -34,11 +34,11 @@ public class Grass extends Plant {
         return id;
     }
 
-    public int getSatiety() {
+    public double getSatiety() {
         return satiety;
     }
 
-    public void setSatiety(int satiety) {
+    public void setSatiety(double satiety) {
         this.satiety = satiety;
     }
 }

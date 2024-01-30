@@ -13,4 +13,5 @@ public abstract class Predator extends Organism implements Eatable, Movable, Rep
 
 
 
+
 }

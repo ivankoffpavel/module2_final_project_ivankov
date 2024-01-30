@@ -1,30 +1,58 @@
 package com.javarush.ivankov.animals;
 
+import com.javarush.ivankov.abstraction.Organism;
 import com.javarush.ivankov.animaltype.Herbivores;
+import com.javarush.ivankov.animaltype.Type;
+import com.javarush.ivankov.arealunit.Areal;
+import com.javarush.ivankov.plants.Grass;
 
-public class Horse extends Herbivores {
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.Random;
+
+public class Horse extends Herbivores  {
     private final int weight = 400;
-    private int satiety = 40;
+    private double satiety = 40;
     private final int runAbility = 4;
-    private final int maxSatiety = 60;
+    private final double maxSatiety = 60;
     public static int count;
-    private int id = 0;
+    private final int id;
 
     public Horse() {
         count++;
         id = count;
     }
-
     @Override
-    public void eat() {
-        System.out.println("Horse ID:" + id + " is trying to eat.");
+    public void eat(Areal areal) {
+        System.out.println("Horse ID:" + id + " is looking for eating.");
         try {
-            Thread.sleep(500);
+            Thread.sleep(10);
         } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e);//for better project visualisation made a delay 250 ms
         }
 
+
+        for (Map.Entry<Type, ArrayList<Organism>> pair : areal.getArealMap().entrySet()) {
+            if (pair.getKey().equals(eatType)) {
+                ArrayList<Organism> grassArrayList = pair.getValue();
+                Random random = new Random();
+                boolean isAppropriate = false;
+                while (!isAppropriate) {
+                    int randomIndex = random.nextInt(grassArrayList.size());
+                    Grass takenRandomGrass = (Grass) grassArrayList.get(randomIndex);
+                    if (takenRandomGrass.getSatiety() > 30) {
+                        satiety = Math.min(satiety + takenRandomGrass.getSatiety(), maxSatiety);
+                        takenRandomGrass.setSatiety(takenRandomGrass.getSatiety() - (maxSatiety - satiety));
+                        System.out.println("The horse ID: " + id + " ate.");
+                        isAppropriate = true;
+                    }else {
+                        System.out.println("There's no food for horse.It's hungry.");
+                    }
+                }
+            }
+        }
     }
+
 
     @Override
     public void move() {
@@ -43,18 +71,21 @@ public class Horse extends Herbivores {
 
         Horse horse = (Horse) o;
 
-        if (satiety != horse.satiety) return false;
-        return id == horse.id;
+        if (Double.compare(getSatiety(), horse.getSatiety()) != 0) return false;
+        return getId() == horse.getId();
     }
 
     @Override
     public int hashCode() {
-        int result = satiety;
-        result = 31 * result + id;
+        int result;
+        long temp;
+        temp = Double.doubleToLongBits(getSatiety());
+        result = (int) (temp ^ (temp >>> 32));
+        result = 31 * result + getId();
         return result;
     }
 
-    public int getSatiety() {
+    public double getSatiety() {
         return satiety;
     }
 
@@ -66,11 +97,11 @@ public class Horse extends Herbivores {
         return weight;
     }
 
-    public int getRunAbility() {
+    public double getRunAbility() {
         return runAbility;
     }
 
-    public int getMaxSatiety() {
+    public double getMaxSatiety() {
         return maxSatiety;
     }
 
@@ -78,4 +109,8 @@ public class Horse extends Herbivores {
     public int getId() {
         return id;
     }
+
+
+
 }
+

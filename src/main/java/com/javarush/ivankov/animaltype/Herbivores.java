@@ -5,7 +5,9 @@ import com.javarush.ivankov.abstraction.Movable;
 import com.javarush.ivankov.abstraction.Organism;
 import com.javarush.ivankov.abstraction.Reproducable;
 
-public abstract class Herbivores extends Organism implements Eatable, Movable, Reproducable{
+public abstract class Herbivores extends Organism implements Eatable, Movable, Reproducable {
+    public static Type eatType = Type.GRASS;
+
 
 
 }

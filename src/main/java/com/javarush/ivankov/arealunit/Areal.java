@@ -3,8 +3,8 @@ package com.javarush.ivankov.arealunit;
 import com.javarush.ivankov.abstraction.Organism;
 import com.javarush.ivankov.animaltype.Type;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 
 public class Areal {
     public static int arealCount = 0;
@@ -12,9 +12,9 @@ public class Areal {
     private final int widthValue;
     private final int lengthValue;
 
-    private HashMap<Type, HashSet<Organism>> arealMap;
+    private final HashMap<Type, ArrayList<Organism>> arealMap;
 
-    public Areal(int widthValue,int lengthValue,HashMap<Type, HashSet<Organism>> arealMap) {
+    public Areal(int widthValue,int lengthValue,HashMap<Type, ArrayList<Organism>> arealMap) {
         this.widthValue = widthValue;
         this.lengthValue = lengthValue;
         this.arealMap = arealMap;
@@ -22,7 +22,7 @@ public class Areal {
         id = arealCount;
     }
 
-    public HashMap<Type, HashSet<Organism>> getArealMap() {
+    public HashMap<Type, ArrayList<Organism>> getArealMap() {
         return arealMap;
     }
 

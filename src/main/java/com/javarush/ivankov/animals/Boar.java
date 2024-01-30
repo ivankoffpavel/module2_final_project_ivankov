@@ -1,15 +1,23 @@
 package com.javarush.ivankov.animals;
 
-import com.javarush.ivankov.animaltype.Predator;
+import com.javarush.ivankov.abstraction.Organism;
+import com.javarush.ivankov.animaltype.Herbivores;
+import com.javarush.ivankov.animaltype.Type;
+import com.javarush.ivankov.arealunit.Areal;
+import com.javarush.ivankov.plants.Grass;
 
-public class Boar extends Predator {
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.Random;
+
+public class Boar extends Herbivores {
     private final int weight = 400;
-    private int satiety = 35;
+    private double satiety = 35;
     private final int runAbility = 2;
-    private final int maxSatiety = 50;
+    private final double maxSatiety = 50;
 
     public static int count;
-    private int id = 0;
+    private int id;
 
     public Boar() {
         count++;
@@ -17,14 +25,34 @@ public class Boar extends Predator {
     }
 
     @Override
-    public void eat() {
-        System.out.println("Boar ID:" + id + " is trying to eat.");
+    public void eat(Areal areal) {
+        System.out.println("Boar ID:" + id + " is looking for eating.");
         try {
-            Thread.sleep(500);
+            Thread.sleep(10);
         } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e);//for better project visualisation made a delay 250 ms
         }
 
+
+        for (Map.Entry<Type, ArrayList<Organism>> pair : areal.getArealMap().entrySet()) {
+            if (pair.getKey().equals(eatType)) {
+                ArrayList<Organism> grassArrayList = pair.getValue();
+                Random random = new Random();
+                boolean isAppropriate = false;
+                while (!isAppropriate) {
+                    int randomIndex = random.nextInt(grassArrayList.size());
+                    Grass takenRandomGrass = (Grass) grassArrayList.get(randomIndex);
+                    if (takenRandomGrass.getSatiety() > 30) {
+                        satiety = Math.min(satiety + takenRandomGrass.getSatiety(), maxSatiety);
+                        takenRandomGrass.setSatiety(takenRandomGrass.getSatiety() - (maxSatiety - satiety));
+                        System.out.println("The horse ID: " + id + " ate.");
+                        isAppropriate = true;
+                    } else {
+                        System.out.println("There's no food for boar.It's hungry.");
+                    }
+                }
+            }
+        }
     }
 
     @Override
@@ -44,18 +72,21 @@ public class Boar extends Predator {
 
         Boar boar = (Boar) o;
 
-        if (satiety != boar.satiety) return false;
+        if (Double.compare(getSatiety(), boar.getSatiety()) != 0) return false;
         return id == boar.id;
     }
 
     @Override
     public int hashCode() {
-        int result = satiety;
+        int result;
+        long temp;
+        temp = Double.doubleToLongBits(getSatiety());
+        result = (int) (temp ^ (temp >>> 32));
         result = 31 * result + id;
         return result;
     }
 
-    public int getSatiety() {
+    public double getSatiety() {
         return satiety;
     }
 
@@ -75,7 +106,7 @@ public class Boar extends Predator {
         return runAbility;
     }
 
-    public int getMaxSatiety() {
+    public double getMaxSatiety() {
         return maxSatiety;
     }
 }

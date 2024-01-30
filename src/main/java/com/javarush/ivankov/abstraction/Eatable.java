@@ -1,5 +1,7 @@
 package com.javarush.ivankov.abstraction;
 
+import com.javarush.ivankov.arealunit.Areal;
+
 public interface Eatable {
-    public void eat();
+    void eat(Areal areal) throws NoSuchFieldException, IllegalAccessException;
 }

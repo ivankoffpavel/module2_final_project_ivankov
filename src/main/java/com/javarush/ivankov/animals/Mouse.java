@@ -1,8 +1,16 @@
 package com.javarush.ivankov.animals;
 
-import com.javarush.ivankov.animaltype.Predator;
+import com.javarush.ivankov.abstraction.Organism;
+import com.javarush.ivankov.animaltype.Herbivores;
+import com.javarush.ivankov.animaltype.Type;
+import com.javarush.ivankov.arealunit.Areal;
+import com.javarush.ivankov.plants.Grass;
 
-public class Mouse extends Predator {
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.Random;
+
+public class Mouse extends Herbivores {
     private final double weight = 0.05;
     private double satiety = 0.01;
     private final int runAbility = 1;
@@ -17,13 +25,29 @@ public class Mouse extends Predator {
     }
 
     @Override
-    public void eat() {
-        System.out.println("Mouse ID:" + id + " is trying to eat.");
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+    public void eat(Areal areal) {
+        System.out.println("Mouse ID:" + id + " is looking for eating.");
+
+        for (Map.Entry<Type, ArrayList<Organism>> pair : areal.getArealMap().entrySet()) {
+            if (pair.getKey().equals(eatType)) {
+                ArrayList<Organism> grassArrayList = pair.getValue();
+                Random random = new Random();
+                boolean isAppropriate = false;
+                while (!isAppropriate) {
+                    int randomIndex = random.nextInt(grassArrayList.size());
+                    Grass takenRandomGrass = (Grass) grassArrayList.get(randomIndex); //randomly looking for food type Grass
+                    if (takenRandomGrass.getSatiety() > 30) {
+                        satiety = Math.min(satiety + takenRandomGrass.getSatiety(), maxSatiety);//operate case when animal eats more than maxSatiety
+                        takenRandomGrass.setSatiety(takenRandomGrass.getSatiety() - (maxSatiety - satiety));
+                        System.out.println("The mouse ID: " + id + " ate.");
+                        isAppropriate = true;
+                    }else {
+                        System.out.println("There's no food for mouse.It's hungry.");
+                    }
+                }
+            }
         }
+
 
     }
 

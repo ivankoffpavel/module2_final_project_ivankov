@@ -1,8 +1,13 @@
 package com.javarush.ivankov.animals;
 
+import com.javarush.ivankov.abstraction.Organism;
 import com.javarush.ivankov.animaltype.Predator;
+import com.javarush.ivankov.animaltype.Type;
+import com.javarush.ivankov.arealunit.Areal;
 
-import java.util.Random;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Wolf extends Predator {
     private final double weight = 50;
@@ -12,7 +17,7 @@ public class Wolf extends Predator {
 
     public static int count;
     public static int maxNumberPerAreal = 30;
-    private int id = 0;
+    private int id;
 
     public Wolf() {
         count++;
@@ -21,19 +26,55 @@ public class Wolf extends Predator {
     }
 
     @Override
-    public void eat() {
-        if(satiety < maxSatiety){
-            System.out.println("Wolf ID:" + id + " is trying to eat.");
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+    public void eat(Areal areal)  {
+
+        if (satiety < maxSatiety) {
+            System.out.println("Wolf ID:" + id + " is looking for eating.");
+            int randomEat = ThreadLocalRandom.current().nextInt(0, 101);
+            Type currentType = null;
+            if (randomEat > 0 && randomEat <= 8) {
+                currentType = Type.HORSE;
+            }
+            if (randomEat > 8 && randomEat <= 15) {
+                currentType = Type.BUFFALO;
+            }
+
+            if (randomEat > 15 && randomEat <= 25) {
+                currentType = Type.DEER;
+            }
+            if (randomEat > 25 && randomEat <= 35) {
+                currentType = Type.BOAR;
+            }
+            if (randomEat > 35 && randomEat <= 45) {
+                currentType = Type.DUCK;
+            }
+            if (randomEat > 45 && randomEat <= 60) {
+                currentType = Type.GOAT;
+            }
+            if (randomEat > 60 && randomEat <= 75) {
+                currentType = Type.SHEEP;
+            }
+            if (randomEat > 75 && randomEat <= 100) {
+                currentType = Type.MOUSE;
+            }
+
+            for (Map.Entry<Type, ArrayList<Organism>> pair : areal.getArealMap().entrySet()) {
+                if (pair.getKey().equals(currentType)) {
+                    if (!pair.getValue().isEmpty()) {// check if collection has any value
+                        Class<? extends Organism> animalClass = pair.getValue().get(0).getClass();
+
+
+
+
+                            System.out.println("Wolf ID:"+id+" ate "+animalClass.getSimpleName());
+                            pair.getValue().remove(0);
+
+                    }
+                }
             }
         }
-        Random random = new Random();
-        System.out.println("Wolf is eating...");
-
     }
+
 
     @Override
     public void move() {
